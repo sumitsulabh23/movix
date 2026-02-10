@@ -21,14 +21,20 @@ const ShowSelection = () => {
             return;
         }
 
-        navigate('/booking/seats', {
-            state: {
-                movie,
-                cinema,
-                date: selectedDate,
-                time: selectedTime
-            }
-        });
+        // Create booking directly without seat selection
+        const bookingData = {
+            id: Date.now(),
+            user: storage.getLoggedInUser()?.name,
+            movie: movie.title,
+            city: movie.city,
+            cinema: cinema.name,
+            date: selectedDate,
+            time: selectedTime,
+            timestamp: new Date().toLocaleString()
+        };
+
+        storage.saveBooking(bookingData);
+        navigate('/booking/success', { state: { booking: bookingData } });
     };
 
     return (
@@ -67,7 +73,7 @@ const ShowSelection = () => {
                     </div>
 
                     <div className="glass-card" style={{ padding: '3rem' }}>
-                        <h3 style={{ fontSize: '2rem', marginBottom: '2.5rem' }}>Reserve Your Seats</h3>
+                        <h3 style={{ fontSize: '2rem', marginBottom: '2.5rem' }}>Book Your Tickets</h3>
 
                         <div style={{ marginBottom: '3rem' }}>
                             <label style={{ display: 'block', marginBottom: '1rem', fontWeight: 600, fontSize: '1rem' }}>Choose Date</label>
@@ -112,10 +118,10 @@ const ShowSelection = () => {
                             style={{ width: '100%', padding: '1.2rem', fontSize: '1.2rem' }}
                             onClick={handleBooking}
                         >
-                            Select Seats
+                            Book Now
                         </button>
                         <p style={{ textAlign: 'center', marginTop: '1.5rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                            By clicking select seats, you can choose your preferred location.
+                            Your ticket will be confirmed instantly
                         </p>
                     </div>
                 </div>

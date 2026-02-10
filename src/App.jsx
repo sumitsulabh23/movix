@@ -6,7 +6,6 @@ import Dashboard from './pages/Dashboard';
 import CitySelection from './components/Dashboard/CitySelection';
 import CinemaList from './components/Booking/CinemaList';
 import ShowSelection from './components/Booking/ShowSelection';
-import SeatSelection from './components/Booking/SeatSelection';
 import Confirmation from './components/Booking/Confirmation';
 import { storage } from './utils/storage';
 import Layout from './components/Common/Layout';
@@ -76,17 +75,6 @@ function App() {
             <ProtectedRoute requireCity={true}>
               <Layout>
                 <ShowSelection />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/booking/seats"
-          element={
-            <ProtectedRoute requireCity={true}>
-              <Layout>
-                <SeatSelection />
               </Layout>
             </ProtectedRoute>
           }
